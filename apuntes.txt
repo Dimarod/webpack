@@ -1,0 +1,103 @@
+Con Babel (.babelrc) prepararemos nuestro codigo para que sea compatible con todos los navegadores
+
+Debemos instalar las siguientes dependencias:
+
+npm i babel-loader @babel/core @babel/preset-env @babel/plugin-transform-runtime -D
+
+
+HTML EN WEBPACK
+
+Lo primero que haremos será instalar los plugins y loader de html para WEBPACK
+
+npm i html-webpack-plugin -D
+
+E iremos a configurarlo al webpack.config
+
+Para trabajar en nuestro webpack con css y preprocesadores
+
+npm i mini-css-extract-plugin css-loader -D Y de nuevo a modificar nuestro webpack.config
+
+El css lo importaremos desde './src/index.js'
+
+Para los preprocesadores podemos instalar el loader del preprocesador de nuestra preferencia y añadirlo a la regla de css
+
+importamos el archivo con la extension del preprocesador en el src/index.js y tambien la expresion regular en la misma regla del css
+
+Esto mezclara nuestro css y nuestro archivo con el preprocesador en uno solo y lo añadirá al idex que se cree en la carpeta dist
+
+
+COPIA DE ARCHIVOS CON WEBPACK
+
+Instalamos el plugin npm i copy-webpack-plugin -D y configuramos dentro de webpack config 
+
+LOADERS DE IMAGENES
+
+Nos permite optimizar las imagenes convirtiendolas en base64
+
+Usaremos un modulo directo de webpack para no tener que instalar nada mas
+
+Se añade como una regla más dentro del webpack.config
+
+LOADERS DE FUENTES
+
+Importamos desde el archivo css las fuentes descargadas en formato woff2 o woff y le aplicamos el weigth
+que queremos usar y el estilo
+
+instalamos el plugin que nos permitirá copiar las fuentes a la carpeta de dist al momento de ir a modo desarrollo
+npm i url-loader file-loader -D
+
+y configuramos en las reglas del webpack.config
+
+
+COMPRIMIR Y OPTIMIZAR 
+
+Instalaremos npm i css-minimizer-webpack-plugin terser-webpack-plugin -D
+y lo requeriremos en webpack.config
+
+
+ALIAS EN WEBPACK
+
+Se añaden en la parte de resolve de el archivo webpack.config bajo la clave de alias: {
+    "@nombre" : "dirResource"
+}
+
+
+VARIABLES DE ENTORNO
+
+
+Instalamos la dependencia que nos ayudará a trabajar con las variables npm i dotenv-webpack -D y crearemos
+un archivo llamado .env este archivo no se envia a github y al momento de entrar a trabajar en un proyecto
+se deben solicitar a la persona encargada
+
+Tambien requeriremos en el archivo webpack.config el modulo que instalamos (DotEnv) y lo configuramos en
+la parte de los plugins
+
+Las variables de entorno sirven para proteger los datos sensibles de nuestra App como por ejemplo
+la conexion a base de datos
+
+
+Podemos crear un archivo para las configuraciones en el modo desarrollo llamado webpack.config.dev.js
+y la instruccion en el package.json será en la parte de scripts:
+
+"dev" : "webpack --config nombre del archivo"
+
+Para hacer lo mismo en modo producción será: 
+
+Instalaremos un plugin que nos permitirá limpiar los antiguos hashes que se generaron en los anteriores
+builds llamado npm i clean-webpack-plugin -D posterior a eso requeriremos el plugin desde el 
+webpack.config del modo produccion.
+
+Aparte de los modos desarrollo y produccion en webpack hay un tercer modo llamado watch
+
+Este nos permite escuchar los cambios de nuestro proyecto y que se compile automaticamente el mismo
+por lo general en modo desarrollo
+
+Para poder trabajar con este modo debemos ir al archivo webpack.config para desarrollo y agregar debajo
+de la parte del modo lo siguiente
+
+watch: true 
+
+otra forma de pasarle o decirle que se utilizará el metodo watch es pasandolo por el package.json
+
+"build:watch" :  "webpack --watch --config webpack.config.js" o en el caso de desarrollo
+"dev:watch" : "webpack --watch --config webpack.config.dev.js"

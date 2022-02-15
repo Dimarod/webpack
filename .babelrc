@@ -1,0 +1,7 @@
+//Creamos un objeto para las configuraciones
+{
+  //Creamos los presets para nuestro proyecto
+  "presets": ["@babel/preset-env"],
+  //Indicamos con que plugin va a trabajar nuestro proyecto
+  "plugins": ["@babel/plugin-transform-runtime"]
+}
